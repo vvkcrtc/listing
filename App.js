@@ -5,11 +5,20 @@ function App() {
   
   let jsonData = require('./data/etsy.json'); 
 
+  function getImageSrc(image){
+    if (image  != undefined )
+    {
+      return image.url_570xN;
+    } else {
+      return "";
+    }
+
+  };
+
   const items = jsonData.map((pos) => { return { 
     listing_id: pos.listing_id,
     url: pos.url,
-    src: pos.MainImage,
- //   src : pos.MainImage.listing_image_id,
+    src: getImageSrc(pos.MainImage),
     title: pos.title,
     currency_code: pos.currency_code,
     price: pos.price,
@@ -17,8 +26,6 @@ function App() {
    } 
   } 
   );
-
- //console.log("!!!",jsonData[1].MainImage.listing_image_id, jsonData[1].MainImage.url_570xN);
   
   return (
     <Listing items={items}/>
